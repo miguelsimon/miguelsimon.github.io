@@ -31,11 +31,11 @@ In our drugged, terrified state, we decide that applying the full machinery of M
 
 To formulate our problem as a finite, discounted-reward MDP we need to decompose it in the following way:
 
-A *state space* $$ S $$ of possible states we can find ourselves in.
-An *action space* $$ A $$ of possible actions we can take in each state
-*Transition probabilities* $$ P(s' \mid a, s) $$ that tell us the probability of going to the next step $$ s' $$ if we take an action $$ a $$ in state $$ s $$.
-A *reward function* $$ R(a, s, s') $$ that tells us the payoff of moving from state $$ s $$ to state $$ s' $$ using action $$ a $$.
-A *discount factor* $$ \gamma \lt 1$$ that tells us how future rewards are discounted: at time step t, the reward is multiplied by $$ \gamma ^ t $$.
+* A *state space* $$ S $$ of possible states we can find ourselves in.
+* An *action space* $$ A $$ of possible actions we can take in each state
+* *Transition probabilities* $$ P(s' \mid a, s) $$ that tell us the probability of going to the next step $$ s' $$ if we take an action $$ a $$ in state $$ s $$.
+* A *reward function* $$ R(a, s, s') $$ that tells us the payoff of moving from state $$ s $$ to state $$ s' $$ using action $$ a $$.
+* A *discount factor* $$ \gamma \lt 1$$ that tells us how future rewards are discounted: at time step t, the reward is multiplied by $$ \gamma ^ t $$.
 
 We can use this formulation to find an *optimal policy*, that is, an optimal way of choosing actions given states so as to maximize our reward.
 
