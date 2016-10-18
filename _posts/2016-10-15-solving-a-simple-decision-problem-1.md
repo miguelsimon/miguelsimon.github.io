@@ -49,6 +49,7 @@ S = \{h, c\}
 $$
 
 We can express this in python code as
+
 ```python
 cold = 0
 hot = 1
@@ -65,6 +66,7 @@ A = \{gh, gc, gr\}
 $$
 
 In code,
+
 ```python
 go_cold = 0
 go_hot = 1
@@ -90,6 +92,7 @@ a & s & s' & R(a, s, s') \\ \hline
 $$
 
 The reward function is represented as a tensor of shape (num_actions, num_states, num_states)
+
 ```python
 R = numpy.zeros((num_actions, num_states, num_states))
 
@@ -290,6 +293,7 @@ print
 ```
 
 returns:
+
 ```
 bad policy
 policy function:
@@ -336,6 +340,7 @@ print
 ```
 
 prints out:
+
 ```
 random policy
 policy function:
