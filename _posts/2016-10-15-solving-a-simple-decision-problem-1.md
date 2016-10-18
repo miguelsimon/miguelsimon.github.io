@@ -11,7 +11,7 @@ This is the first in a series of posts solving a toy decision problem using diff
 
 I'm using the excellent Sutton and Barto book, [Reinforcement Learning: An Introduction](https://webdocs.cs.ualberta.ca/~sutton/book/ebook/the-book.html).
 
-[Code is on gihub](https://github.com/miguelsimon/miguelsimon.github.io/code).
+[Code is on gihub](https://github.com/miguelsimon/miguelsimon.github.io/tree/master/code).
 
 ## Problem statement
 
