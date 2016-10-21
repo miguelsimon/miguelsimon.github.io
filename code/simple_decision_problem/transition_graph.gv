@@ -1,0 +1,35 @@
+digraph finite_state_machine {
+    rankdir=LR;
+    node [shape = doublecircle]; hot cold;
+    node [shape = circle] [label = "go_hot"]; hot_go_hot   cold_go_hot;
+    node [shape = circle] [label = "go_cold"]; hot_go_cold cold_go_cold;
+    node [shape = circle] [label = "go_random"]; hot_go_random cold_go_random;
+    
+    hot -> hot_go_hot;
+    hot -> hot_go_cold;
+    hot -> hot_go_random;
+
+    hot_go_hot -> hot [ label = "0.95, -1" ];
+    hot_go_hot -> cold [ label = "0.05, 1" ];
+
+    hot_go_cold -> hot [ label = "0.05, -1" ];
+    hot_go_cold -> cold [ label = "0.95, 1" ];
+
+    hot_go_random -> hot [ label = "0.5, -1" ];
+    hot_go_random -> cold [ label = "0.5, 1" ];
+
+
+    cold -> cold_go_hot;
+    cold -> cold_go_cold;
+    cold -> cold_go_random;
+
+    cold_go_hot -> hot [ label = "0.95, 1" ];
+    cold_go_hot -> cold [ label = "0.05, -1" ];
+
+    cold_go_cold -> hot [ label = "0.05, 1" ];
+    cold_go_cold -> cold [ label = "0.95, -1" ];
+
+    cold_go_random -> hot [ label = "0.5, 1" ];
+    cold_go_random -> cold [ label = "0.5, -1" ];
+
+}

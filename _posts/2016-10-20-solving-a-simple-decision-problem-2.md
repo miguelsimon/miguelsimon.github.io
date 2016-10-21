@@ -13,7 +13,7 @@ Our data now comes from interacting with the environment, choosing actions, and 
 
 We need to use our interaction with the environment to refine our policy: this is [reinforcement learning](https://webdocs.cs.ualberta.ca/~sutton/book/ebook/node28.html).
 
-[Code is on gihub](https://github.com/miguelsimon/miguelsimon.github.io/tree/master/code/q_learning.py).
+[Code is on gihub](https://github.com/miguelsimon/miguelsimon.github.io/tree/master/code/simple_decision_problem/q_learning.py).
 
 ## Problem statement
 

@@ -13,7 +13,7 @@ I'm using the excellent Sutton and Barto book, [Reinforcement Learning: An Intro
 
 You'll need [python](https://www.python.org/) and [numpy](http://www.numpy.org/) to run the code.
 
-[Code is on github](https://github.com/miguelsimon/miguelsimon.github.io/tree/master/code/value_iteration.py).
+[Code is on github](https://github.com/miguelsimon/miguelsimon.github.io/tree/master/code/simple_decision_problem/value_iteration.py).
 
 ## <a name="problem_statement"></a> Problem statement
 
@@ -26,6 +26,10 @@ A buzzer sounds to mark a time step. At each time step, we can decide to move to
 We want to choose a way of moving that maximizes our comfort. If we stay on the same tile type for too long, our feet become either too cold or too hot. [For some reason](https://en.wikipedia.org/wiki/Project_MKUltra#Drugs) we find our normal thought processes don't seem to work correctly: we are unable to find a sensible movement policy.
 
 In our drugged, terrified state, we decide that applying the full machinery of Markov decision processes to find a solution is a good idea. Inexplicably, we have access to a modern computer equipped with python and numpy and connected to the not-yet existent internet as we're hopping around.
+
+In a flash of insight, we visualize a nasty-looking [transition graph](https://webdocs.cs.ualberta.ca/~sutton/book/ebook/node33.html#fig:st-graph) for our predicament:
+
+![transition_graph](/resources/simple_decision_problem/transition_graph.gv.svg){:class="img-responsive"}
 
 ### Markov decision process recap
 
@@ -213,7 +217,7 @@ The quantity of interest is the  **infinite-horizon discounted reward**:
 
 $$
 
-\underbrace{\sum^{\infty}_{t=0}}_{\rm infinite-horizon} {\underbrace{\gamma^t}_{\rm discount} \cdot \underbrace{R(s_t, a_t, s_{t+1})}_{\rm reward}}
+\underbrace{\sum^{\infty}_{t=0}}_{\rm infinite-horizon} {\underbrace{\gamma^t}_{\rm discount} \cdot \underbrace{R(a_t, s_t, s_{t+1})}_{\rm reward}}
 
 $$
 
@@ -221,7 +225,7 @@ Because out process is a [Markov process](https://webdocs.cs.ualberta.ca/~sutton
 
 $$ 
 
-\mathbb{E}_\pi \left[ \sum^{\infty}_{t=0} {\gamma^t R(s_t, \pi(s_t), s_{t+1})} \right]
+\mathbb{E}_\pi \left[ \sum^{\infty}_{t=0} {\gamma^t R(\pi(s_t), s_t, s_{t+1})} \right]
 
 $$
 
@@ -231,7 +235,7 @@ A very useful concept is that of the [value function](https://webdocs.cs.ualbert
 
 $$
 
-V^\pi(x) = \mathbb{E}_\pi \left[ R(x, \pi(x), s_1) + \sum^{\infty}_{t=1} {\gamma^t R(s_t, \pi(s_t), s_{t+1})} \right]
+V^\pi(x) = \mathbb{E}_\pi \left[ R(\pi(x), x, s_1) + \sum^{\infty}_{t=1} {\gamma^t R(\pi(s_t), s_t, s_{t+1})} \right]
 
 $$
 
@@ -381,7 +385,7 @@ We're going to apply Bellman's value iteration algorithm, which says that the op
 
 $$
 
-V_{i+1}(s) := \max_a \left\{ \sum_{s'} P(s' | a, s) \left( R(s, a, s') + \gamma V_i(s') \right) \right\}
+V_{i+1}(s) := \max_a \left\{ \sum_{s'} P(s' | a, s) \left( R(a, s, s') + \gamma V_i(s') \right) \right\}
 
 $$
 
