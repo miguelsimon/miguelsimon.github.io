@@ -101,22 +101,6 @@ def print_policy_statistics(state_names, action_names, R, P, gamma, policy):
     v = monte_carlo_value_estimate(R, P, gamma, policy)
     print_value_function(state_names, v)
     print
-    
-bad_policy = numpy.zeros(num_states, dtype = int)
-bad_policy[cold] = go_cold
-bad_policy[hot] = go_hot
-
-print 'bad policy'
-print_policy_statistics(state_names, action_names, R, P, gamma, bad_policy)
-print
-
-random_policy = numpy.zeros(num_states, dtype = int)
-random_policy[cold] = go_random
-random_policy[hot] = go_random
-
-print 'random policy'
-print_policy_statistics(state_names, action_names, R, P, gamma, random_policy)
-print
 
 def one_value_iteration(R, P, gamma, s, v):
     num_states = R.shape[1]
@@ -156,26 +140,35 @@ def calculate_policy(R, P, gamma, v):
         policy[s] = _calculate_policy(R, P, gamma, s, v)
     return policy
     
+    
+if __name__ == '__main__':
+    
+    bad_policy = numpy.zeros(num_states, dtype = int)
+    bad_policy[cold] = go_cold
+    bad_policy[hot] = go_hot
 
-value = value_iteration(R, P, gamma, max_iter = 500)
-policy = calculate_policy(R, P, gamma, value)
+    print 'bad policy'
+    print_policy_statistics(state_names, action_names, R, P, gamma, bad_policy)
+    print
 
-print 'optimal value:'
-print_value_function(state_names, value)
-print
-print 'optimal policy:'
-print_policy_function(state_names, action_names, policy)
-print
-estimated_value = monte_carlo_value_estimate(R, P, gamma, policy)
-print 'value estimate for optimal policy:'
-print_value_function(state_names, estimated_value)
+    random_policy = numpy.zeros(num_states, dtype = int)
+    random_policy[cold] = go_random
+    random_policy[hot] = go_random
+
+    print 'random policy'
+    print_policy_statistics(state_names, action_names, R, P, gamma, random_policy)
+    print
+
+    value = value_iteration(R, P, gamma, max_iter = 500)
+    policy = calculate_policy(R, P, gamma, value)
+
+    print 'optimal value:'
+    print_value_function(state_names, value)
+    print
+    print 'optimal policy:'
+    print_policy_function(state_names, action_names, policy)
+    print
+    estimated_value = monte_carlo_value_estimate(R, P, gamma, policy)
+    print 'value estimate for optimal policy:'
+    print_value_function(state_names, estimated_value)
         
-    
-#def test():
-    #value = value_iteration(states, actions, reward, transition_p, gamma, max_iter = 200)
-    #policy = calculate_policy(states, actions, reward, transition_p, gamma, value)
-    #print policy
-    #print monte_carlo_value_estimate(states, actions, reward, transition_p, gamma, policy)
-    
-#if __name__ == '__main__':
-    #test()

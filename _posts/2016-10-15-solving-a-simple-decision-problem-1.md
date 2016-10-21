@@ -1,12 +1,11 @@
 ---
 layout: post
 comments: true
-title: "Solving a simple decision problem part 1"
+title: "Solving a simple decision problem 1: value iteration"
 meta: "A tutorial walkthrough on using value iteration to solve a simple Markov decision process in python."
 date: 2016-10-15
+tags: [reinforcement_learning]
 ---
-
-## Solving a simple decision problem with value iteration
 
 This is the first in a series of posts solving a toy decision problem using different techniques, as I'm in the process of learning about them. **There may be conceptual and implementation mistakes**, so take everything you read here with a sack of salt, and please leave a comment if you spot a mistake.
 
@@ -14,9 +13,9 @@ I'm using the excellent Sutton and Barto book, [Reinforcement Learning: An Intro
 
 You'll need [python](https://www.python.org/) and [numpy](http://www.numpy.org/) to run the code.
 
-[Code is on github](https://github.com/miguelsimon/miguelsimon.github.io/tree/master/code).
+[Code is on github](https://github.com/miguelsimon/miguelsimon.github.io/tree/master/code/value_iteration.py).
 
-## Problem statement
+## <a name="problem_statement"></a> Problem statement
 
 It's the 60s; we're an unwilling participant in a [questionably ethical](https://en.wikipedia.org/wiki/Project_MKUltra) research program.
 
