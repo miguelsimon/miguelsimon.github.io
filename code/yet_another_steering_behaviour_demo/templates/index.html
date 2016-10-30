@@ -1,0 +1,79 @@
+<html>
+
+    <head>
+        <title>Sandbox</title>
+        <script>
+function Conn (callbacks) {
+    var uri = "ws://" + window.location.host + "/websocket";
+    this.ws = new WebSocket(uri);
+    this.ws.onopen = function (event) {
+        callbacks.on_open();
+        console.log("open");
+    };
+    
+    var self = this;
+    this.ws.onmessage = function (event) {
+        var msg = JSON.parse(event.data);
+        switch (msg.msg) {
+            case "world_desc":
+                callbacks.on_world_desc(msg);
+                break;
+            case "step":
+                callbacks.on_step(msg);
+                break;
+            default:
+                console.log("unknown message", msg);       
+        }
+    }
+    
+    this.on_world_desc = function (msg) {
+        console.log("on_world_desc", msg);
+    }
+    
+    this.on_step = function (msg) {
+        console.log("on_step", msg);
+    }
+};
+
+function World (canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    scale = 600;
+    
+    
+    this.draw_circle = function (x, y, r) {
+//         this.ctx.beginPath();
+//         this.ctx.arc(x * this.scale, y * this.scale, r * this.scale ,0 , Math.PI*2, true);
+//         this.ctx.stroke();
+           this.ctx.fillRect(x*scale, y*scale, 10, 10);
+    }
+    
+    this.on_open = function () {
+    }
+    
+    this.on_world_desc = function (msg) {
+    }
+    
+    this.on_step = function (msg) {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        var p = msg.s[0];
+        this.draw_circle(p[0], p[1], 0.01);
+        
+    }
+}
+    
+</script>
+        
+    </head>
+    
+    <body>
+    
+        <canvas id="canvas" width="600" height="600"></canvas>
+    
+    <script>
+    world = new World(document.getElementById("canvas"));
+    conn = new Conn(world);
+    </script>
+
+    </body>
+</html>

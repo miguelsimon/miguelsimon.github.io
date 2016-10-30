@@ -1,0 +1,47 @@
+<html>
+
+    <head>
+        <title>Sandbox</title>
+        <script src="https://threejs.org/build/three.js"></script>
+        <script src="../static/draw.js"></script>
+        <script>
+        </script>
+        
+    </head>
+    
+    <body>
+    
+    <script>
+        draw = new Draw.Draw(window.innerWidth, window.innerHeight);
+        
+        document.body.appendChild( draw.get_element() );
+        
+        var delta = new Draw.CircleDelta(
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(100, 100, 0),
+            1);
+            
+        
+        var alpha = 0;
+        var start;
+        
+        draw.set_frame([delta]);
+        var render = function (timestamp) {
+            if (!start) start = timestamp;
+            var progress = timestamp - start;
+            console.log(progress);
+            if (progress < 5000) {
+                requestAnimationFrame( render );
+                draw.move(alpha);
+                alpha += 0.001;
+//             console.log(alpha);
+                draw.renderer.render(draw.scene, draw.camera);
+            }
+        };
+
+        render(performance.now());
+        
+    </script>
+
+    </body>
+</html>

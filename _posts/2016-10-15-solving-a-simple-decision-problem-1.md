@@ -27,10 +27,6 @@ We want to choose a way of moving that maximizes our comfort. If we stay on the 
 
 In our drugged, terrified state, we decide that applying the full machinery of Markov decision processes to find a solution is a good idea. Inexplicably, we have access to a modern computer equipped with python and numpy and connected to the not-yet existent internet as we're hopping around.
 
-In a flash of insight, we visualize a nasty-looking [transition graph](https://webdocs.cs.ualberta.ca/~sutton/book/ebook/node33.html#fig:st-graph) for our predicament:
-
-![transition_graph](/resources/simple_decision_problem/transition_graph.gv.svg){:class="img-responsive"}
-
 ### Markov decision process recap
 
 [Here is a good explanation of what a Markov decision process is](https://webdocs.cs.ualberta.ca/~sutton/book/ebook/node33.html) by people who actually know what they're talking about. The aim of this post is to *solve* a Markov decision problem, not to explain MDPs in general.
@@ -169,6 +165,10 @@ $$
 ```python
 gamma = 0.8
 ```
+
+In a flash of insight, we visualize a nasty-looking [transition graph](https://webdocs.cs.ualberta.ca/~sutton/book/ebook/node33.html#fig:st-graph) for our predicament:
+
+![transition_graph](/resources/simple_decision_problem/transition_graph.gv.svg){:class="img-responsive"}
 
 ## What is a policy?
 
