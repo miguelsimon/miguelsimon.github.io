@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <script src="/code/rrt/rrt.js"></script>
+        <script src="https://threejs.org/build/three.js"></script>
+    </head>
+
+    <body>
+    <div id="canvas"></div>
+    <script>
+    
+    var initial = new THREE.Vector2(0, 0);
+    
+    var distance_f = function (a, b) {
+        return a.distanceTo(b);
+    };
+    
+    var rand_conf = function () {
+        return new THREE.Vector2(
+            Math.random() * 1000 - 500,
+            Math.random() * 1000 - 500) ;
+    };
+    
+    var new_conf = function (near, rand) {
+        var dir = rand.clone();
+        dir.sub(near);
+        dir.normalize();
+        dir.multiplyScalar(10);
+        dir.add(near);
+        return dir;
+    };
+    
+    var rrt = new RRT.RRT(
+        initial,
+        distance_f,
+        rand_conf,
+        new_conf);
+    
+    function Draw(width, height) {
+        this.width = width;
+        this.height = height;
+
+        var scene = new THREE.Scene();
+        var camera = new THREE.OrthographicCamera( -width / 2, width / 2, height / 2, -height / 2, -5, 5 );
+
+        camera.position.z = 5;
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( width, height );
+
+        this.scene = scene;
+        this.camera = camera;
+        this.renderer = renderer;
+    }
+
+    Draw.prototype.get_element = function () {
+        return this.renderer.domElement;
+    }
+    
+    Draw.prototype.draw_rrt = function (rrt) {
+        var geometry = new THREE.Geometry();
+        rrt.tree.edges.forEach(function (val, key) {
+            geometry.vertices.push(new THREE.Vector3(key.x, key.y, 0));
+            geometry.vertices.push(new THREE.Vector3(val.x, val.y, 0));
+        });
+        
+        var material = new THREE.LineBasicMaterial( {color: 0x0000ff} );
+        
+        var lines = new THREE.LineSegments(geometry, material);
+        this.scene.add(lines);
+    }
+    
+        
+    for(var i = 0; i < 2000; i++) {
+        rrt.step();
+    }
+    
+    target_element = document.getElementById("canvas");
+    var draw = new Draw(600, 600);
+    target_element.appendChild( draw.get_element() );
+    
+    draw.draw_rrt(rrt);
+    
+    var render = function (timestamp) {
+        requestAnimationFrame( render );
+        draw.renderer.render(draw.scene, draw.camera);
+    };
+
+    render();
+
+    </script>
+
+    </body>
+</html>

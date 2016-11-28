@@ -3,8 +3,8 @@
     <head>
         <title>Sandbox</title>
         <script src="https://threejs.org/build/three.js"></script>
-        <script src="../static/draw2.js"></script>
-        <script src="../static/world.js"></script>
+<!--         <script src="../static/draw2.js"></script> -->
+        <script src="../static/demo.js"></script>
 
         <style>   
 
@@ -23,106 +23,51 @@
         
         <script>
         "use strict";
-        function DemoWindow(target_element) {
-            
-            var draw = new Draw.Draw(200, 200);
-            target_element.appendChild( draw.get_element() );
-                
-            var world = new World.World();
-        
-            var vehicles = [];
-            var step = function (dt) {
-                vehicles.forEach(function (vehicle) {
-                    vehicle.move(vehicles);
-                });
-                world.physics_step(dt);
-            }
 
-            var start = performance.now();
-            var render = function (timestamp) {
-//                 var dt = performance.now() - start;
-//                 console.log(dt / 1000);
-                start = performance.now();
-                requestAnimationFrame( render );
-                step(0.1);
-                draw.update();
-                draw.renderer.render(draw.scene, draw.camera);
-
-            };
-
-            render(performance.now());
-            
-            draw.get_element().addEventListener("click", function (event) {
-                vehicles.forEach(function (vehicle) {
-                    vehicle.set_target(draw.mouse_to_world(event.offsetX, event.offsetY));
-                });
-            });
-            
-            this.add_vehicle = function (vehicle) {
-                vehicles.push(vehicle);
-                world.add_actor(vehicle.actor);
-                draw.add_actor(vehicle);
-            }
-            
-            this.get_vehicles = function () {
-                return vehicles;
-            }
-        }
-        
-    
-        function Vehicle(actor, max_speed, target) {
-            this.actor = actor;
-            this.max_speed = max_speed;
-            this.max_impulse = 1;
-            this.target = target;
-        }
-
-        Vehicle.prototype.set_target = function(v) {
-            this.target.copy(v);
-        }
-        
-        Vehicle.prototype.get_position = function () {
-            return this.actor.p;
-        }
-        
-        Vehicle.prototype.get_radius = function () {
-            return this.actor.r;
-        }
-
-        var seek_vehicle = new Vehicle(new World.Actor(0, 0, 2), 100, new THREE.Vector3(0, 0));
+        var seek_vehicle = new Demo.Vehicle(
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(0, 0, 0),
+            2,
+            100,
+            new THREE.Vector3(0, 0, 0));
         
         seek_vehicle.move = function (world) {
             var desired_v = this.target.clone();
-            desired_v.sub(this.actor.p);
-            var speed = this.max_speed;
+            desired_v.sub(this.p);
             desired_v.normalize();
-            desired_v.multiplyScalar(speed);
+            desired_v.multiplyScalar(this.max_speed);
+            
             var steering = desired_v.clone();
-            steering.sub(this.actor.v);
+            steering.sub(this.v);
             steering.clampLength(0, this.max_impulse);
-            this.actor.v.add(steering);
+            this.v.add(steering);
         }
         
-        var seek_demo = new DemoWindow(document.getElementById("seek"));
+        var seek_demo = new Demo.DemoWindow(document.getElementById("seek"));
         seek_demo.add_vehicle(seek_vehicle);
         
-        var arrive_vehicle = new Vehicle(new World.Actor(0, 0, 2), 100, new THREE.Vector3(0, 0));
-
+        var arrive_vehicle = new Demo.Vehicle(
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(0, 0, 0),
+            2,
+            100,
+            new THREE.Vector3(0, 0, 0));
+            
         arrive_vehicle.move = function (world) {
             var desired_v = this.target.clone();
-            desired_v.sub(this.actor.p);
+            desired_v.sub(this.p);
             var distance = desired_v.length();
-            var ramped_speed = this.max_speed * (distance / 500);
+            var ramped_speed = this.max_speed * (distance / 200);
             var speed = Math.min(ramped_speed, this.max_speed);
             desired_v.normalize();
             desired_v.multiplyScalar(speed);
             var steering = desired_v.clone();
-            steering.sub(this.actor.v);
+            steering.sub(this.v);
             steering.clampLength(0, this.max_impulse);
-            this.actor.v.add(steering);
+            this.v.add(steering);
         }
         
-        var arrive_demo = new DemoWindow(document.getElementById("arrive"));
+        var arrive_demo = new Demo.DemoWindow(document.getElementById("arrive"));
         
         arrive_demo.add_vehicle(arrive_vehicle);
         
