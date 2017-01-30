@@ -138,7 +138,7 @@ La distinción entre valor y variable es fundamental.
 
 #### Tipos básicos
 
-Lo que sigue es un guión; la documentación y el ```help``` de python tienen la información en profundidad.
+Lo que sigue es un guión; la [documentación de estructuras de datos](https://docs.python.org/2/tutorial/datastructures.html) y el ```help``` de python tienen la información en profundidad.
 
 ##### Tipos numéricos
 
@@ -165,7 +165,7 @@ Es interesante que el operador ```+``` también está definido para cadenas de c
 
 ##### Listas
 
-Son listas ordenadas de elementos; tienen una sintaxis especial para su construcción, usando corchetes:
+Una [lista](https://docs.python.org/2/tutorial/datastructures.html#more-on-lists) es un conjunto ordenado de elementos; tiene una sintaxis especial para su construcción, usando brackets:
 
 ```
 >>> [1,2,3]
@@ -206,6 +206,65 @@ quiero extender la lista x con la lista y para que los contenidos de x sean:
 >>> x
 [1, 2, 3, 4, 5]
 ```
+
+##### Tuplas
+
+Una [tupla](https://docs.python.org/2/tutorial/datastructures.html#tuples-and-sequences) es un conjunto ordenado *e inmutable* de valores de una longitud determinada: es básicamente igual al concepto de [tupla en matemáticas](https://en.wikipedia.org/wiki/Tuple).
+
+```
+>>> uno_tupla = (1,)
+>>> dos_tupla = (1, 'dos')
+```
+
+##### Diccionarios
+
+Un [diccionario](https://docs.python.org/2/tutorial/datastructures.html#dictionaries) es una estructura de datos que asocia una clave a un valor, como un diccionario asocia una clave (la palabra) a un valor (su definición).
+
+```
+>>> diccionario = {'cuchillo': 'implemento cortante', 'mantel': 'trapo para cubrir una mesa'}
+>>> diccionario['mantel']
+'trapo para cubrir una mesa'
+>>> diccionario['cuchillo']
+'implemento cortante'
+```
+
+Los diccionarios son mutables, como las listas.
+
+##### Conjuntos
+
+Un [conjunto](https://docs.python.org/2/tutorial/datastructures.html#sets) es básicamente una implementación en python del [concepto de conjunto en matemáticas](https://en.wikipedia.org/wiki/Set_(mathematics)). Es una colección no ordenada de *elementos distintos entre sí*. 
+
+```
+>>> a = set()
+>>> animales = set()
+>>> animales.add('perro')
+>>> animales.add('gato')
+>>> animales
+set(['gato', 'perro'])
+>>> animales.add('perro')
+>>> animales
+set(['gato', 'perro'])
+```
+
+Si usamos ```help(set)``` veremos que, como los conjuntos en matemáticas, tenemos operaciones de unión, intersección, diferencia, etc.
+
+#### Composición
+
+Lo más interesante de estos tipos es que se pueden *componer*; puedes tener diccionarios con tuplas como clave y conjuntos de cadenas como valor, o (casi) cualquier otro tipo de combinación. 
+
+Por ejemplo, podríamos escoger representar personas como 2-tuplas de (nombre, apellido) y las marcas de coches que poseen como cadenas de caracteres, y utilizar un diccionario para asociar personas a marcas de coches en su posesión:
+
+```
+{('pepe', 'sanchez'): set([]), ('juan', 'martinez'): set(['porsche', 'mercedes'])}
+```
+
+Dado un problema a resolver, es fundamental escoger sensatamente las estructuras de datos para representarlo.
+
+**EJERCICIO** Qué pasa cuando intentas construir un conjunto de listas, ej. ```set([ [1], [1,2] ])``` (el error es informativo: google es útil cuando salta un error que no comprendes).
+
+
+
+
 
 
 
