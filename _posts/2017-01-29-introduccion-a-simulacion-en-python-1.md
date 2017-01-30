@@ -7,6 +7,9 @@ date: 2017-01-29
 tags: [spanish]
 ---
 
+* TOC
+{:toc}
+
 ### ¿Qué vamos a hacer?
 
 Esto es una introducción no exhaustiva para empezar a usar el python: habrá que consultar la [documentación](https://docs.python.org/2/).
@@ -160,10 +163,49 @@ Es interesante que el operador ```+``` también está definido para cadenas de c
 
 **EJERCICIO** Experimentar con sumar cadenas de caracteres: qué resulta de sumar `´"pepe" + "paco"``? Que pasa cuando se intenta sumar una cadena de caracteres a un número? Tiene sentido este comportamiento?
 
+##### Listas
 
+Son listas ordenadas de elementos; tienen una sintaxis especial para su construcción, usando corchetes:
 
+```
+>>> [1,2,3]
+[1, 2, 3]
+```
 
+A diferencia de los tipos numéricos y las cadens de caracteres, son *mutables*: esto quiere decir que los contenidos de la lista pueden cambiar con el tiempo:
 
+```
+>>> x = []
+>>> x
+[]
+>>> x.append(1)
+>>> x
+[1]
+>>> x.append(2)
+>>> x
+[1, 2]
+```
+
+```append``` es un método para añadir un elemento a la lista: recordemos que podemos usar ```help()``` para preguntar lo que hace append:
+
+```
+>>> x = []
+>>> help(x.append)
+```
+
+**EJERCICIO** Usar ```help([]) para encontrar un método que extienda una lista existente con otra lista: si tengo listas x e y definidas de la siguiente manera:
+
+```
+>>> x = [1, 2]
+>>> y = [3,4,5]
+```
+
+quiero extender la lista x con la lista y para que los contenidos de x sean:
+
+```
+>>> x
+[1, 2, 3, 4, 5]
+```
 
 
 
