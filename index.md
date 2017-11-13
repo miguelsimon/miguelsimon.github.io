@@ -8,24 +8,12 @@ layout: default
 
 <h1>{{ page.title }}</h1>
 
-## Reinforcement learning:
+## Posts:
 
 <ul class="posts">
 
 	{% for post in site.posts reversed %}
-        {% if post.tags contains 'reinforcement_learning' %}
         <li><span>{{ post.date | date_to_string }}</span> <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-        {% endif %}
 	{% endfor %}
 </ul>
 
-## Introducción a Python en Español
-
-<ul class="posts">
-
-    {% for post in site.posts reversed %}
-        {% if post.tags contains 'spanish' %}
-        <li><span>{{ post.date | date_to_string }}</span> <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-        {% endif %}
-    {% endfor %}
-</ul>

@@ -17,7 +17,7 @@ A long time ago I was captivated by the powerfully simple ideas behind [boids](h
 
 ### Seek
 
-The seek behaviour goes for its target at maximum speed. Of course, this will lead to oscillations when the vehicle reaches the target:
+The seek behaviour goes for its target at maximum speed. Of course, this will lead to oscillations when the vehicle reaches the target (click to provide a target):
 
 <div id="seek_canvas"></div>
 
